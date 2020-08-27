@@ -132,27 +132,13 @@ a, a:hover, a:focus {
     height: 3.5%;
 }
 
-input[type=text]{
-    width: 110%;
-    
-    background-color: #410ED3;
-    border: 0px ;
-    border-radius:25px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
-
-/* When the input field gets focus, change its width to 300% */
-input[type=text]:focus {
-    border: 0px ;
-    border-radius:25px;
-    width: 300%;
-  }
-
-::placeholder{
+.navbar-brand{
     color:#fff;
-    font-style: italic;
+    
+    font-size:1.4em;
 }
+
+
 
 .topbutton1 {
     background-color: #F31244;
@@ -289,8 +275,8 @@ input[type=text]:focus {
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.bg-custom{
-    width: fit-content;
+.cloud{
+    width: 50%;
     height: auto;
 }
 
@@ -351,4 +337,77 @@ input[type=text]:focus {
 
 .footer ul span{
     color:red;
+}
+
+/* ---------------------------------------------------
+    EXPLORE PAGE
+----------------------------------------------------- */
+.explore-heading{
+    color: #fff;
+    font-size: 3em;
+    text-align: center;
+}
+
+.explore-disclaimer{
+    color: #fff;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.explore-page{
+    margin:7% 7%;
+    color: #fff;
+}
+.class-option{
+    margin-right: 3%;
+    background:linear-gradient(#9d7ff7,#cbbafa);
+    border-radius: 20px;
+    padding: 5% 7%;
+
+}
+
+.class-option h3 h4{
+    text-align: center;
+}
+
+.section-option{
+    margin-right: 3%;
+    background:linear-gradient(#9d7ff7,#cbbafa);
+    border-radius: 20px;
+    padding: 5% 7%;
+
+}
+
+.section-option h3 h4{
+    text-align: right;
+}
+
+.subject-option{
+    margin-right: 3%;
+    background:linear-gradient(#9d7ff7,#cbbafa);
+    border-radius: 20px;
+    padding: 5% 7%;
+
+}
+
+.subject-option h3 h4{
+    text-align: center;
+}
+
+.circle{
+    background: #5739B7;
+    width:13%;
+    text-align: center;
+    border-radius: 50%;
+    float: left;
+}
+
+.circle p{
+    color: #fff;
+}
+
+.form-control{
+    background-color: #9d7ff7;
+    widows: 90%;
+    height: 110%;
 }
