@@ -13,7 +13,6 @@ p {
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: #999;
 }
 
 a, a:hover, a:focus {
@@ -59,10 +58,13 @@ a, a:hover, a:focus {
 #sidebar {
     min-width: 270px;
     max-width: 270px;
-    background:linear-gradient(#280886,#9675f7);
+    height:100vh;
+    background: linear-gradient(180deg, #280886 35.08%, rgba(40, 8, 134, 0.65) 53.12%, rgba(40, 8, 134, 0.47) 79.17%, rgba(40, 8, 134, 0.37) 99.95%);
     color: #fff;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
 }
 
 #sidebar.active {
@@ -124,7 +126,8 @@ a, a:hover, a:focus {
     padding: 0px;
     min-height: 100vh;
     transition: all 0.3s;
-    background: linear-gradient(#410ED3,#ece6fd);
+    background: linear-gradient(180deg, #410ED3 0%, #410ED3 11.78%, rgba(65, 14, 211, 0.9) 23.83%, rgba(65, 14, 211, 0.81) 34.2%, rgba(65, 14, 211, 0.7) 45.19%, rgba(65, 14, 211, 0.6) 56.19%, rgba(65, 14, 211, 0.51) 67.61%, rgba(65, 14, 211, 0.33) 78.39%, rgba(65, 14, 211, 0.12) 89.18%, rgba(65, 14, 211, 0.11) 100%);
+    background-blend-mode: multiply;
 }
 
 .topbar-custom{
@@ -132,9 +135,10 @@ a, a:hover, a:focus {
     height: 3.5%;
 }
 
+
+
 .navbar-brand{
     color:#fff;
-    
     font-size:1.4em;
 }
 
@@ -144,14 +148,16 @@ a, a:hover, a:focus {
     background-color: #F31244;
     border-radius: 2em;
     border-width: 0px;
-    box-shadow: 0px 4px 4px #552FD1;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+    
 }
 
 .topbutton2{
     background-color: #F31244;
     border-radius: 2em;
     border-width: 0px;
-    box-shadow: 0px 4px 4px #552FD1;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+    
 }
 
 
@@ -232,7 +238,7 @@ a, a:hover, a:focus {
 .landing-text-heading {
     color: #fff;
     font-size: 4em;
-    font-family: sans-serif;
+    font-family: 'Raleway', sans-serif;
     font-weight: 500;
     text-align: center;
     margin-right: 51%;
@@ -249,7 +255,7 @@ a, a:hover, a:focus {
     padding:1% 3%;
     border-radius: 2em;
     border-width: 0px;
-    box-shadow: 0px 4px 4px #552FD1;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
 }
 
 .landing-text-small{
@@ -275,8 +281,86 @@ a, a:hover, a:focus {
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.cloud{
-    width: 50%;
+/* ---------------------------------------------------
+    SCROLL ICON -START
+----------------------------------------------------- */
+.mouse-icon {
+    border: 3px solid #fff;
+    border-radius: 16px;
+    height: 44px;
+    width: 26px;
+    display: block;
+    z-index: 10;
+    opacity: 0.7;
+    margin-left: 27%;
+  }
+  .mouse-icon .wheel {
+    -webkit-animation-name: drop;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-play-state: running;
+    -webkit-animation-name: drop;
+            animation-name: drop;
+    -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+    -webkit-animation-delay: 0s;
+            animation-delay: 0s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-play-state: running;
+            animation-play-state: running;
+  }
+  .mouse-icon .wheel {
+    position: relative;
+    border-radius: 10px;
+    background: #fff;
+    width: 4px;
+    height: 6px;
+    top: 4px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @-webkit-keyframes drop {
+    0% {
+      top: 5px;
+      opacity: 0;
+    }
+    30% {
+      top: 10px;
+      opacity: 1;
+    }
+    100% {
+      top: 25px;
+      opacity: 0;
+    }
+  }
+  @keyframes drop {
+    0% {
+      top: 5px;
+      opacity: 0;
+    }
+    30% {
+      top: 10px;
+      opacity: 1;
+    }
+    100% {
+      top: 25px;
+      opacity: 0;
+    }
+  }
+
+
+/* ---------------------------------------------------
+    SCROLL ICON -END
+----------------------------------------------------- */
+
+
+.cloud img{
+    width:100%;
     height: auto;
 }
 
@@ -355,59 +439,100 @@ a, a:hover, a:focus {
 }
 
 .explore-page{
-    margin:7% 7%;
+    margin:4% 7%;
     color: #fff;
 }
-.class-option{
-    margin-right: 3%;
-    background:linear-gradient(#9d7ff7,#cbbafa);
-    border-radius: 20px;
-    padding: 5% 7%;
 
-}
-
-.class-option h3 h4{
+.explore-page h3 {
+    font-size: 23px;
     text-align: center;
 }
+
+.explore-page h4{
+    font-size:18px;
+    text-align: center;
+}
+
+.class-option{
+    margin-right: 3%;
+    background:linear-gradient(#6635f2,#cbbafa);
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
+    padding: 7% 7%;
+
+}
+
 
 .section-option{
     margin-right: 3%;
-    background:linear-gradient(#9d7ff7,#cbbafa);
+    background:linear-gradient(#6635f2,#cbbafa);
     border-radius: 20px;
-    padding: 5% 7%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
+    padding: 7% 7%;
 
 }
 
-.section-option h3 h4{
-    text-align: right;
-}
 
 .subject-option{
     margin-right: 3%;
-    background:linear-gradient(#9d7ff7,#cbbafa);
+    background:linear-gradient(#6635f2,#cbbafa);
     border-radius: 20px;
-    padding: 5% 7%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
+    padding: 7% 7%;
 
-}
-
-.subject-option h3 h4{
-    text-align: center;
 }
 
 .circle{
     background: #5739B7;
-    width:13%;
-    text-align: center;
+    width:40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
     float: left;
 }
 
 .circle p{
     color: #fff;
+    text-align: center;
+    margin-top: 15px;
 }
 
 .form-control{
-    background-color: #9d7ff7;
-    widows: 90%;
-    height: 110%;
+    background-color: #cbbafa;
+    width: 80%;
+    height: 50px;
+    margin-left: 10%;
+    border:0px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------------------------------------------------
+    VIDEO LIST
+----------------------------------------------------- */
+.heading1 {
+    color:#fff;
+    text-align: center;
+}
+
+.heading2{
+    color:#fff;
+    text-align: center;
+}
+
+.first-bg{
+    margin:5% 5% 0% 5%;
+    padding:0px;
+}
+
+.online-education{
+    width: 70%;
+    padding:0px;
+    height: auto;
+}
+
+.second-bg{
+    height: 30%;
+    background-color: linear-gradient(#280886,#fff);
 }

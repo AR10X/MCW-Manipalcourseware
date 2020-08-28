@@ -10,6 +10,7 @@
 
   <!-- google fonts link below here-->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:200,100,400" rel="stylesheet" type="text/css" />
 
   <!--Bootstrap 4 CSS-->
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -30,7 +31,7 @@
 
     <div class="wrapper">
         <!-- Sidebar Holder -->
-        <nav id="sidebar">
+        <nav id="sidebar" class="sticky-top">
             <div class="sidebar-logo">
                 <img class="img-fluid mx-auto d-block" src="img/logo-icon.png">
             </div>
@@ -63,7 +64,7 @@
         <!-- Page Content Holder -->
         
         <div id="content">
-            <nav class="navbar navbar-expand-sm topbar-custom ">
+            <nav id="navbar" class="navbar navbar-expand-sm sticky-top topbar-custom ">
                 <div class="container-fluid justify-content-start ">
                     <button type="button" id="sidebarCollapse" class="navbar-btn">
                         <span></span>
@@ -71,12 +72,12 @@
                         <span></span>
                     </button>
                     <a class="navbar-brand mr-auto" href="index.html">ManipalCourseWare</a>
-                    <ul class="nav navbar-nav topnav ">
+                    <ul class="nav navbar-nav topnav  ">
                         <li>
-                            <a href="#" class="btn btn-info topbutton1 " role="button"><i class="fas fa-mobile-alt"></i>   DOWLOAD THE APP</a>
+                            <a href="#" class="btn btn-info topbutton1" role="button"><i class="fas fa-mobile-alt"></i>DOWLOAD THE APP</a>
                         </li>
                         <li>
-                            <a href="#" class="btn btn-info topbutton2 " role="button"><i class="fas fa-share-alt"></i>SHARE</a>
+                            <a href="#" class="btn btn-info topbutton2" role="button"><i class="fas fa-share-alt"></i>SHARE</a>
                         </li>
                     </ul>
                 </div>
@@ -85,11 +86,18 @@
             <!--Landing page-->
                 <div class="landingpage">
                     <img src="img/illustration-landingpage.png" class="illustration">
-                    <h1 class="landing-text-heading">ADD AN EYECATCHING TEXT!</h1>
+                    <h1 class="landing-text-heading">ARE YOU <span
+                        class="txt-rotate"
+                        data-period="2000"
+                        data-rotate='[ "BORED OF ONLINE CLASSES", "FEELING DISCOURAGED TO STUDY?", "STRUGGLING TO FIND YOUR LECTURES", "WILLING TO GET RID OF THIS PROBLEM", "SURE? LOCK KIYA JAYE?" ]'></span></h1>
                     
                     <a href="explore.html" class="btn btn-info btn-custom1" role="button">GET STARTED</a>
                     
                     <h3 class="landing-text-small">Some text decribing the service we provide.This text should be carefully formatted</h3>
+                </div>
+                <div class="mouse-icon">
+                    <div class="wheel">
+                    </div>
                 </div>
                 <div class="cloud">
                     <img src="img/cloud.svg">
