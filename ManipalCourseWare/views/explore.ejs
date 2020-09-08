@@ -25,6 +25,7 @@
   <script type="text/javascript" src="https://unpkg.com/@popperjs/core@2"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/functionality.js"></script>
+  <script type="text/javascript" src="js/dropDown.js"></script>
 </head>
 <div class="wrapper">
   <!-- Sidebar Holder -->
@@ -94,11 +95,24 @@
                     <h4>Some text describing the selection </h4>
                     <div class="form-group">
                       <label for="sel1"></label>
-                      <select class="form-control" id="sel1">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                      <select class="form-control" id="branch" name="branch" onChange="changecat(this.value);">
+                        <option value="" disabled selected>Select</option>
+                        <option value="AERO">AERO: AERONAUTICAL</option>
+                        <option value="AUTO">AUTO: AUTOMOBILE</option>
+                        <option value="BME">BME: BIOMEDICAL</option>
+                        <option value="BIO">BIO: BIOTECHNOLOGY</option>
+                        <option value="CHE">CHE: CHEMICAL</option>
+                        <option value="CIV">CIV: CIVIL</option>
+                        <option value="CCE">CCE: COMPUTER & COMMUNICATION</option>
+                        <option value="CSE">CSE: COMPUTER SCIENCE</option>
+                        <option value="ELE">ELE: ELECTRICAL & ELECTRONICS</option>
+                        <option value="ECE">ECE: ELECTRONICS & COMMUNICATION</option>
+                        <option value="IP">IP: INDUSTRIAL & PRODUCTION</option>
+                        <option value="IT">IT: INFORMATION TECHNOLOGY</option>
+                        <option value="EI">E&I: ELECTRONICS & INSTRUMENTATION</option>
+                        <option value="MME">MME: MECHANICAL</option>
+                        <option value="MTE">MTE: MECHATRONICS</option>
+                        <option value="MED">MED: MEDIA TECHNOLOGY</option>
                       </select>
                     </div>
                     <br>
@@ -114,11 +128,8 @@
                     <h4>Some text describing the selection </h4>
                     <div class="form-group">
                       <label for="sel1"></label>
-                      <select class="form-control" id="sel1">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                      <select class="form-control" id="category" >
+                        <option value="" disabled selected>Select</option>
                       </select>
                     </div>
                     <br>
@@ -134,11 +145,8 @@
                     <h4>Some text describing the selection </h4>
                     <div class="form-group">
                       <label for="sel1"></label>
-                      <select class="form-control" id="sel1">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                      <select class="form-control"  id="category2">
+                        <option value="" disabled selected>Select</option>
                       </select>
                     </div>
                     <br>

@@ -506,6 +506,7 @@ a, a:hover, a:focus {
     margin-left: 10%;
     border:0px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
+    transition: color 0.3s ease, background-color 0.3s ease, border-bottom-color 0.3s ease;
 }
 
 .submit{
