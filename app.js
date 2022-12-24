@@ -9,12 +9,14 @@ const ejs = require("ejs");
 //set up template engine
 app.set('view engine', 'ejs');
 
+//fire controllers
+controllerOne(app);
+
 //static files
 app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({extended : false}));
 
-//fire controllers
-controllerOne(app);
+
 
 //listen to port
 app.listen(3000);
