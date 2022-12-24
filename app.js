@@ -1,7 +1,7 @@
 //Required dependencies and frameworks
 const express = require('express');
 const app = express();
-const controllerOne = require('./controllers/controllerOne');
+const controllerRouting = require('./controllers/controllerOne');
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 
@@ -10,7 +10,7 @@ const ejs = require("ejs");
 app.set('view engine', 'ejs');
 
 //fire controllers
-controllerOne(app);
+controllerRouting(app);
 
 //static files
 app.use(express.static('./public'));
