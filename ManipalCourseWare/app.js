@@ -1,13 +1,17 @@
-var express = require('express');
-var controllerOne = require('./controllers/controllerOne');
+//Required dependencies and frameworks
+const express = require('express');
+const app = express();
+const controllerOne = require('./controllers/controllerOne');
+const bodyParser = require("body-parser");
+const ejs = require("ejs");
 
-var app = express();
 
 //set up template engine
 app.set('view engine', 'ejs');
 
 //static files
 app.use(express.static('./public'));
+app.use(bodyParser.urlencoded({extended : false}));
 
 //fire controllers
 controllerOne(app);
