@@ -27,6 +27,12 @@
   <script type="text/javascript" src="js/functionality.js"></script>
 </head>
 <body>
+
+<!--CSS Spinner-->
+<div class="spinner-wrapper">
+    <div class="spinner"></div>
+</div>
+
   <div class="wrapper">
     <!-- Sidebar Holder -->
     <nav id="sidebar" class="sticky-top">
@@ -38,10 +44,7 @@
                 <a href="index.html"><i class="fas fa-home"></i>  HOME</a>
             </li>
             <li>
-                <a href="explore.html"><i class="fas fa-play-circle"></i>  EXPLORE</a>
-            </li>
-            <li>
-                <a href="#"><i class="fas fa-users"></i>  CROWDSOURCE</a>
+                <a href="/explore"><i class="fas fa-play-circle"></i>  EXPLORE</a>
             </li>
             <li>
                 <p>FOLLOW US</p>
@@ -54,7 +57,7 @@
         <div class="sidebar-footer">
             <ul class="list-unstyled">
                 <li><i class="fa fa-copyright" aria-hidden="true"></i>Copyright 2020</li>
-                <li>Made with <span><i class="fa fa-heart" aria-hidden="true"></i></span> by DevSplash</li>
+                <li>Made with <span><i class="fa fa-heart" aria-hidden="true"></i></span> by Abdul Rehaman</li>
             </ul>
         </div>
     </nav>
@@ -101,54 +104,35 @@
                         <h1>KINEMATICS OF MACHINERY</h1>
                     </div>
                     <div class="col-lg-6">
-                        <a href="explore.html" class="btn btn-info mainmenu-btn" role="button">GO BACK TO MAIN MENU</a>
+                        <a href="/explore" class="btn btn-info mainmenu-btn" role="button">GO BACK TO MAIN MENU</a>
                     </div>
                 </div>
             </div>
-            <a href="video-page.html">
-                <div class="video-card">
-                    <div class="row">
-                        <div class="col-lg-6 video-heading">
-                            <h3>1.BASICS OF KINEMATICS<br><br>AUG 3</h3>
+            <% print.forEach((lecture)=>{ %>
+                <form action="/video-page/<%=lecture.link%>" method="POST">
+                    <button type="submit" class="btn-card">
+                        <div class="video-card">
+                            <div class="row">
+                                <div class="col-lg-6 video-heading">
+                                    <h3><%=lecture.lecture_no %> . <%=lecture.lecture_topic %></h3><br>
+                                    <h4><%=lecture.date_time %><br><%=lecture.teacher_name %></h4>
+                                </div>
+                                <div class="col-lg-6 video-img">
+                                    <img src="img/thumbnail.png" class="img-thumbnail">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-lg-6 video-img">
-                            <img src="img/thumbnail.png" class="img-thumbnail">
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href="video-page.html">
-                <div class="video-card">
-                    <div class="row">
-                        <div class="col-lg-6 video-heading">
-                            <h3>1.BASICS OF KINEMATICS<br><br>AUG 3</h3>
-                        </div>
-                        <div class="col-lg-6 video-img">
-                            <img src="img/thumbnail.png" class="img-thumbnail">
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href="video-page.html">
-                <div class="video-card">
-                    <div class="row">
-                        <div class="col-lg-6 video-heading">
-                            <h3>1.BASICS OF KINEMATICS<br><br>AUG 3</h3>
-                        </div>
-                        <div class="col-lg-6 video-img">
-                            <img src="img/thumbnail.png" class="img-thumbnail">
-                        </div>
-                    </div>
-                </div>
-            </a>
+                    </button>
+                </form>
+            <% }); %>
         </div>
         <br>
         <br>
         <br>
         <div class="footer">
             <ul class="list-unstyled">
-                <li><i class="fa fa-copyright" aria-hidden="true"></i>Copyright 2020</li>
-                <li>Made with <span><i class="fa fa-heart" aria-hidden="true"></i></span> by DevSplash</li>
+                <li><i class="fa fa-copyright" aria-hidden="true"></i>Copyright 2022</li>
+                <li>Made with <span><i class="fa fa-heart" aria-hidden="true"></i></span> by Abdul Rehaman</li>
             </ul>
         </div>
     </div>

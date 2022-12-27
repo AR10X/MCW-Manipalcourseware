@@ -30,7 +30,7 @@ var subjectByCategory = {
     CHE: ["A","B"],
     CIV: ["A","B","C"],
     CCE: ["A","B"],
-    CSE: ["MATHS III","DSD","OOPS","DSA","COA"],
+    CSE: ["MAT","DSD","OOPS","DSA","COA"],
     ELE: ["A","B","C"],
     ECE: ["A","B","C","D"],
     IP: ["A"],
@@ -42,7 +42,7 @@ var subjectByCategory = {
 }
 
 function changecat(value) {
-    if (value.length == 0) document.getElementById("category").innerHTML = "<option></option>";
+    if (value.length == 0) document.getElementById("section").innerHTML = "<option></option>";
     else {
         var catOptions = "";
         var thirdCatOptions = "";
@@ -52,7 +52,7 @@ function changecat(value) {
         for (var categoryId in subjectByCategory[value]) {
                 thirdCatOptions += "<option>" + subjectByCategory[value][categoryId] + "</option>";
         }
-        document.getElementById("category").innerHTML = catOptions;
-        document.getElementById("category2").innerHTML = thirdCatOptions
+        document.getElementById("section").innerHTML = catOptions;
+        document.getElementById("subject").innerHTML = thirdCatOptions
     }
 }

@@ -70,3 +70,12 @@ var TxtRotate = function(el, toRotate, period) {
     document.body.appendChild(css);
   };
 
+  $(document).ready(function() {
+    //Preloader
+    preloaderFadeOutTime = 1500;
+    function hidePreloader() {
+    var preloader = $('.spinner-wrapper');
+    preloader.fadeOut(preloaderFadeOutTime);
+    }
+    hidePreloader();
+    });

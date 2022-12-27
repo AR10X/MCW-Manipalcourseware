@@ -27,6 +27,12 @@
   <script type="text/javascript" src="js/functionality.js"></script>
 </head>
 <body>
+
+<!--CSS Spinner-->
+<div class="spinner-wrapper">
+    <div class="spinner"></div>
+</div>
+
   <div class="wrapper">
     <!-- Sidebar Holder -->
     <nav id="sidebar" class="sticky-top">
@@ -38,10 +44,7 @@
                 <a href="index.html"><i class="fas fa-home"></i>  HOME</a>
             </li>
             <li>
-                <a href="explore.html"><i class="fas fa-play-circle"></i>  EXPLORE</a>
-            </li>
-            <li>
-                <a href="#"><i class="fas fa-users"></i>  CROWDSOURCE</a>
+                <a href="/views/explore.ejs"><i class="fas fa-play-circle"></i>  EXPLORE</a>
             </li>
             <li>
                 <p>FOLLOW US</p>
@@ -54,7 +57,7 @@
         <div class="sidebar-footer">
             <ul class="list-unstyled">
                 <li><i class="fa fa-copyright" aria-hidden="true"></i>Copyright 2020</li>
-                <li>Made with <span><i class="fa fa-heart" aria-hidden="true"></i></span> by DevSplash</li>
+                <li>Made with <span><i class="fa fa-heart" aria-hidden="true"></i></span> by Abdul Rehaman</li>
             </ul>
         </div>
     </nav>
@@ -100,7 +103,11 @@
             <div class="row middle">
                 <div class="col-lg-10">
                     <div class="middle-left">
-                        <div class="img" style='max-width: 640px'><div style='position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;'><iframe width="640" height="360" src="https://web.microsoftstream.com/embed/video/16910d08-03c1-4773-9a58-02ad484df02a?autoplay=false&amp;showinfo=true" allowfullscreen style="border:none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 100%; max-width: 100%;"></iframe></div></div>
+                        <div class="img" style='max-width: 640px'><div style='position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;'>
+                            <iframe width="640" height="360" src="https://web.microsoftstream.com/embed/video/<%=printvalue%>?autoplay=false&amp;showinfo=true" allowfullscreen style="border:none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 100%; max-width: 100%;">
+                            </iframe>
+                        </div>
+                    </div>
                     </div>
                 </div>
                 <div class="col-lg-2 middle-right">
@@ -116,15 +123,15 @@
             <br>
             <br>
             <br>
-            <a href="explore.html" class="btn btn-info mainmenu-btn2" role="button">GO BACK TO MAIN MENU</a>
+            <a href="/explore" class="btn btn-info mainmenu-btn2" role="button">GO BACK TO MAIN MENU</a>
             <div class="cloud">
                 <img src="img/cloud2.png">
             </div>
         </div>
       <div class="footer">
         <ul class="list-unstyled">
-            <li><i class="fa fa-copyright" aria-hidden="true"></i>Copyright 2020</li>
-            <li>Made with <span><i class="fa fa-heart" aria-hidden="true"></i></span> by DevSplash</li>
+            <li><i class="fa fa-copyright" aria-hidden="true"></i>Copyright 2022</li>
+            <li>Made with <span><i class="fa fa-heart" aria-hidden="true"></i></span> by Abdul Rehaman</li>
         </ul>
         </div>
     </div>

@@ -1,11 +1,11 @@
-//Required dependencies and frameworks
+//Import libraries and packages
 const express = require('express');
 const app = express();
-const controllerRouting = require('./controllers/controllerOne');
+const controllerRouting = require('./controllers/controllerRouting');
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 require('dotenv').config({path: __dirname + '/process.env'});
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient } = require("mongodb");
 
 
 //set up template engine
@@ -16,53 +16,58 @@ controllerRouting(app);
 
 //static files
 app.use(express.static('./public'));
+app.use('/video-page', express.static('./public'))
 app.use(bodyParser.urlencoded({extended : false}));
 
-const host = process.env.DATABASE_HOST;
-const pswd = process.env.DATABASE_PASSWORD;
+//Database config
+const db_key = process.env.DATABASE_KEY;
+const uri = "mongodb+srv://admin:"+db_key+"@cluster0.alu0pdy.mongodb.net/?retryWrites=true&w=majority";
 
-const uri = "mongodb+srv://"+host+":"+pswd+":@cluster0.mongodb.net/test?retryWrites=true&w=majority";
+// Create a new MongoClient
+const client = new MongoClient(uri, { useNewUrlParser: true });
 
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  console.log("Database connected!");
-  db.close();
-});
+async function run() {
+  try {
+    await client.connect();
+    await client.db("lecture").command({ ping: 1 });
+    console.log("Connected successfully to server");
+  } finally {
+    await client.close();
+  }
+}
+run().catch(console.dir);
 
 app.post('/video-list', (req, res)=>{
     const branch = req.body.branch;
     const section = req.body.section;
     const subject = req.body.subject;
     
+    client.connect((err) => {
+      if (err) {
+        console.log("Error connecting to MongoDB server:", err);
+        return;
+      }
     
-    //querying data from database
-    // var sql = "SELECT * FROM master_table WHERE branch_code=? AND section=? AND subject_code=? ORDER BY lecture_no ASC";
-
-    // connection.query(sql,[branch,section,subject],(error, results)=>{
-    //     if (error) {
-    //       return console.error(error.message);
-    //       }
-    //     else{
-    //       res.render('video-list', {print: results});
-    //     }
-    //   });
-  });
+      const db = client.db("lecture").collection("videos");
+      var query = {branch_code: branch, section: section, subject_code: subject};
+      
+      db.find(query).toArray((err, result) => {
+        if (err) {
+          console.log("Error executing query:", err);
+          return;
+        }
+        res.render('video-list', {print: result});
+      });
+    });
+});
 
   
 
-  // app.post('/video-page/:param1', function(req, res){
-  //     videovalue= req.params;
-  //     var sql1 = "SELECT * FROM master_table WHERE link=?";
+app.post('/video-page/:param', function(req, res){
+    const link_val = req.params.param;
+    res.render('video-page', {printvalue:link_val});
+});
 
-  //   connection.query(sql1,[videovalue.param1],(error, results1)=>{
-  //       if (error) {
-  //         return console.error(error.message);
-  //         }
-  //       else{
-  //         res.render('video-page', {printvalue: results1});
-  //       }
-  //     });
-  // });
 //listen to port
 app.listen(3000);
 console.log('You are listening to port 3000...');
