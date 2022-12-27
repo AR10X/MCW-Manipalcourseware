@@ -3,6 +3,8 @@
 
 body {
     font-family: 'Poppins', sans-serif;
+    user-select: none;
+    /* background-color: black; */
 }
 
 /* ---------------------------------------------------
@@ -113,6 +115,7 @@ a, a:hover, a:focus {
 #sidebar.active {
     margin-left: -270px;
     transform: rotateY(100deg);
+    display: block;
 }
 
 #sidebar .sidebar-logo {
@@ -183,6 +186,14 @@ a, a:hover, a:focus {
 .navbar-brand{
     color:#fff;
     font-size:1.4em;
+}
+
+.navbar-brand:hover{
+    color: #fff;
+    text-shadow: 0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 10px #fff,
+                0 0 10px #fff;
 }
 
 
