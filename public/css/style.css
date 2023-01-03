@@ -216,7 +216,7 @@ a, a:hover, a:focus {
 
 
 #sidebarCollapse {
-    width: 3%;
+    width: 40px;
     height: auto;
     background:#3100C9;
     cursor: pointer;
@@ -239,7 +239,7 @@ a, a:hover, a:focus {
     opacity: 0;
 }
 #sidebarCollapse span:last-of-type {
-    transform: rotate(-45deg) translate(1px, -1px);
+    transform: rotate(-45deg) translate(2px, -2px);
 }
 
 
@@ -267,7 +267,7 @@ a, a:hover, a:focus {
     #sidebarCollapse span:nth-of-type(2),
     #sidebarCollapse span:last-of-type {
         transform: none;
-        opacity: 0;
+        opacity: 100;
         margin: 5px auto;
     }
     #sidebarCollapse.active span {
@@ -280,7 +280,7 @@ a, a:hover, a:focus {
         opacity: 0;
     }
     #sidebarCollapse.active span:last-of-type {
-        transform: rotate(-45deg) translate(1px, -1px);
+        transform: rotate(-45deg) translate(2px, -2px);
     }
 
 }
