@@ -51,7 +51,7 @@ app.post('/video-list', (req, res)=>{
       const db = client.db("lecture").collection("videos");
       var query = {branch_code: branch, section: section, subject_code: subject};
       
-      db.find(query).toArray((err, result) => {
+      db.find(query).sort({lecture_no: 1}).toArray((err, result) => {
         if (err) {
           console.log("Error executing query:", err);
           return;
@@ -69,5 +69,5 @@ app.post('/video-page/:param', function(req, res){
 });
 
 //listen to port
-app.listen(3000);
-console.log('You are listening to port 3000...');
+app.listen(3100);
+console.log('You are listening to port 3100...');
