@@ -6,7 +6,7 @@ ManipalCourseWare (MCW) is a video curation platform for online classes recorded
 Features
 --------
 
--   Video curation: MCW curates and organizes videos of online classes for every branch, section, and subject of the second year students of BTech MIT Manipal.
+-   Video curation: MCW curates and organizes videos of online classes for every branch, section, and subject of the second year students of BTech MIT Manipal (Batch 2023).
 -   Microsoft login: To access the platform, users must log in to their Microsoft learner account and have access to the organization whose classes are being recorded.
 -   Class organization: The platform allows users to easily browse and find videos for the classes they are enrolled in.
 
