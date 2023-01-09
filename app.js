@@ -30,7 +30,7 @@ async function run() {
   try {
     await client.connect();
     await client.db("lecture").command({ ping: 1 });
-    console.log("Connected successfully to server");
+    console.log("Connected successfully to MongoDB server");
   } finally {
     await client.close();
   }
