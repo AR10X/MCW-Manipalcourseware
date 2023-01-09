@@ -362,6 +362,7 @@ a, a:hover, a:focus {
         text-align: center;
         margin: 5% 5%;
         font-size: 1em;
+        font-weight: 300;
     }
     .btn-custom1{
         display: block;
@@ -532,6 +533,7 @@ a, a:hover, a:focus {
     color: #fff;
     font-size: 1.2em;
     text-align: center;
+    line-height: 1.5;
 }
 
 .explore-page{
@@ -622,7 +624,20 @@ a, a:hover, a:focus {
     border-color: red;
 }
 
-
+@media (max-width: 768px){
+    .explore-heading{
+        font-size: 2.3em;
+        margin: 20% 1% 5% 1%;
+    }
+    .explore-disclaimer{
+        margin: 10% 5%;
+    }
+    .submit{
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+    }
+  }
 
 /* ---------------------------------------------------
     VIDEO LIST
