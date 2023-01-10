@@ -89,7 +89,7 @@
                         <h2>Sorry, no videos available for this subject</h2>
                     <% } else { %>
                     <% print.forEach((lecture)=>{ %>
-                        <form action="https://web.microsoftstream.com/embed/video/<%=lecture.link%>?autoplay=false&showinfo=true" method="POST">
+                        <form action="<%=lecture.link%>" method="POST">
                             <button type="submit" class="btn-card video-link">
                                 <div class="video-card">
                                     <div class="row">
@@ -113,7 +113,7 @@
                     <div class="video-player">
                         
                             <div class="video-inside">
-                                <iframe id="video-player" width="640" height="360" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen style="border:none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 100%; max-width: 100%;">
+                                <iframe id="video-player" width="640" height="360" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" allowfullscreen style="border:none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 100%; max-width: 100%;">
                                 </iframe>
                             </div>
                         <!-- <div style='max-width: 640px'>

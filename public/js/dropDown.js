@@ -30,7 +30,7 @@ var subjectByCategory = {
     CHE: ["A","B"],
     CIV: ["A","B","C"],
     CCE: ["A","B"],
-    CSE: ["MAT","DSD","OOPS","DSA","COA"],
+    CSE: ["MAT","DSD","OOP","DSA","COA"],
     ELE: ["A","B","C"],
     ECE: ["A","B","C","D"],
     IP: ["A"],

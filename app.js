@@ -37,7 +37,7 @@ async function run() {
 }
 run().catch(console.dir);
 
-app.post('/video-list', (req, res)=>{
+app.post('/videoConsole', (req, res)=>{
     const branch = req.body.branch;
     const section = req.body.section;
     const subject = req.body.subject;
