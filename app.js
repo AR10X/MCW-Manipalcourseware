@@ -56,12 +56,11 @@ app.post('/video-list', (req, res)=>{
           console.log("Error executing query:", err);
           return;
         }
-        res.render('video-list', {print: result});
+        res.render('videoConsole', {print: result});
       });
     });
 });
 
-  
 
 app.post('/video-page/:param', function(req, res){
     const link_val = req.params.param;

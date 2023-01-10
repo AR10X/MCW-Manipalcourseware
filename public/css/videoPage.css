@@ -80,7 +80,6 @@ backdrop-filter: blur(9.8px);
     justify-content: center;
     margin: 3% auto;
     width: 30%;
-    border-width: 0px;
     border-width: 3px;
     border-color: white;
 }

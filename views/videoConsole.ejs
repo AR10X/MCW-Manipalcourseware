@@ -16,12 +16,12 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <!-- Our Custom CSS -->
   <link rel="stylesheet" href="css/style.css" >
-  <link rel="stylesheet" href="css/index.css" >
+  <!-- <link rel="stylesheet" href="css/index.css" > -->
   <link rel="stylesheet" href="css/mouseScroll.css" >
   <link rel="stylesheet" href="css/spinner.css" >
-  <link rel="stylesheet" href="css/explore.css" >
-  <link rel="stylesheet" href="css/videoList.css" >
-  <link rel="stylesheet" href="css/videoPage.css" >
+  <!-- <link rel="stylesheet" href="css/explore.css" > -->
+  <link rel="stylesheet" href="css/videoConsole.css" >
+  <!-- <link rel="stylesheet" href="css/videoPage.css" > -->
  
   <!--fontawesome icons kitcode below-->
   <script src="https://kit.fontawesome.com/f18f73cc60.js" crossorigin="anonymous"></script>
@@ -32,7 +32,7 @@
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/functionality.js"></script>
 </head>
-<body>
+<body >
 
 <!--CSS Spinner-->
 <div class="spinner-wrapper">
@@ -50,7 +50,7 @@
                 <a href="index.html"><i class="fas fa-home"></i>  HOME</a>
             </li>
             <li>
-                <a href="/views/explore.ejs"><i class="fas fa-play-circle"></i>  EXPLORE</a>
+                <a href="/explore"><i class="fas fa-play-circle"></i>  EXPLORE</a>
             </li>
             <li>
                 <p>FOLLOW US</p>
@@ -69,9 +69,9 @@
     </nav>
 
     <!-- Page Content Holder -->
-        
+    
     <div id="content">
-        <nav id="navbar" class="navbar navbar-expand-sm sticky-top topbar-custom ">
+        <nav class="navbar sticky-top navbar-expand-sm topbar-custom-video position-fixed top-0 w-100 px-0">
             <div class="container-fluid justify-content-start ">
                 <button type="button" id="sidebarCollapse" class="navbar-btn active">
                     <span></span>
@@ -79,67 +79,58 @@
                     <span></span>
                 </button>
                 <a class="navbar-brand mr-auto" href="index.html">ManipalCourseWare</a>
-                <!-- <ul class="nav navbar-nav topnav  ">
-                    <li>
-                        <a href="#" class="btn btn-info topbutton1" role="button"><i class="fas fa-mobile-alt"></i>DOWLOAD THE APP</a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn btn-info topbutton2" role="button"><i class="fas fa-share-alt"></i>SHARE</a>
-                    </li>
-                </ul> -->
             </div>
         </nav>
-        <div class="container-fluid">
-            <!-- <div class="row header">
-                <div class="col-sm-4">
-                    <a href="#" class="btn btn-info prev-btn" role="button">PREV</a>
+        <div class="container-fluid main-section">
+            <div class="row">
+                <div class="col-lg-5 order-2 order-lg-1 left ">
+                    <p>MME/A/KOM</p>
+                    <% print.forEach((lecture)=>{ %>
+                        <form action="/video-page/<%=lecture.link%>" method="POST">
+                            <button type="submit" class="btn-card">
+                                <div class="video-card">
+                                    <div class="row">
+                                        <div class="col-lg-6 video-heading">
+                                            <p><%=lecture.lecture_no %> . <%=lecture.lecture_topic %></p><br>
+                                            <p><%=lecture.date_time %><br><%=lecture.teacher_name %></p>
+                                        </div>
+                                        <div class="col-lg-6 video-img">
+                                            <img src="img/thumbnail.png" class="img-thumbnail">
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
+                    <% }); %>
                 </div>
-                <div class="col-lg-4">
-                    <select class="form-control" id="sel">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                </div>
-                <div class="col-lg-4">
-                    <a href="#" class="btn btn-info next-btn" role="button">NEXT</a>
-                </div>
-            </div> -->
-            <div class="row middle">
-                <div class="col-lg-10">
-                    <div class="middle-left">
-                        <div style='max-width: 640px'>
-                            <div style='position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;'>
-                                <iframe width="640" height="360" src="https://web.microsoftstream.com/embed/video/<%=printvalue%>?autoplay=false&showinfo=true" allowfullscreen style="border:none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 100%; max-width: 100%;">
+                <div class="col-lg-7 order-1 order-lg-2 right">
+                    <h1>KINEMATICS OF MACHINERY</h1>
+                    <a href="/explore" class="btn btn-info mainmenu-btn" role="button">GO BACK TO MAIN MENU</a>
+                    <div class="video-player">
+                        
+                            <div class="video-inside">
+                                <iframe width="640" height="360" src="https://web.microsoftstream.com/embed/video/?autoplay=false&showinfo=true" allowfullscreen style="border:none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 100%; max-width: 100%;">
                                 </iframe>
                             </div>
-                        </div>
+                        <!-- <div style='max-width: 640px'>
+                            <div style='position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;'>
+                                <iframe width="640" height="360" src="https://web.microsoftstream.com/embed/video/?autoplay=false&showinfo=true" allowfullscreen style="border:none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 100%; max-width: 100%;">
+                                </iframe>
+                            </div>
+                        </div> -->
                     </div>
+                      
                 </div>
-                <!-- <div class="col-lg-2 middle-right">
-                    <p>CHANGE SUBJECT</p>
-                    <select class="form-control" id="sel2">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                </div> -->
             </div>
-            <br>
-            <br>
-            <br>
-            <a href="/explore" class="btn btn-info mainmenu-btn2" role="button">GO BACK TO MAIN MENU</a>
         </div>
     </div>
-    <div class="footer">
+    
+    <!-- <div class="footer">
         <ul class="list-unstyled">
             <li><i class="fa fa-copyright" aria-hidden="true"></i>Copyright 2022</li>
             <li>Made with <span><i class="fa fa-heart" aria-hidden="true"></i></span> by Abdul Rehaman</li>
         </ul>
-    </div>
- </div>
+    </div> -->
+</div>
 </body>
 </html>
-
