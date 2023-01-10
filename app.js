@@ -62,10 +62,10 @@ app.post('/video-list', (req, res)=>{
 });
 
 
-app.post('/video-page/:param', function(req, res){
-    const link_val = req.params.param;
-    res.render('video-page', {printvalue:link_val});
-});
+// app.post('/video-page/:param', function(req, res){
+//     const link_val = req.params.param;
+//     res.render('video-page', {printvalue:link_val});
+// });
 
 //listen to port
 app.listen(3100);
