@@ -81,52 +81,7 @@
                 <a class="navbar-brand mr-auto" href="index.html">ManipalCourseWare</a>
             </div>
         </nav>
-        <div class="container-fluid main-section">
-            <div class="row">
-                <div class="col-lg-5 order-2 order-lg-1 left ">
-                    <p><%= branch %>/<%= section %>/<%= subject %></p>
-                    <% if (print.length == 0) { %>
-                        <h2>Sorry, no videos available for this subject</h2>
-                    <% } else { %>
-                    <% print.forEach((lecture)=>{ %>
-                        <form action="https://web.microsoftstream.com/embed/video/<%=lecture.link%>?autoplay=false&showinfo=true" method="POST">
-                            <button type="submit" class="btn-card video-link">
-                                <div class="video-card">
-                                    <div class="row">
-                                        <div class="col-lg-6 video-heading">
-                                            <p><%=lecture.lecture_no %> . <%=lecture.lecture_topic %></p><br>
-                                            <p><%=lecture.date_time %><br><%=lecture.teacher_name %></p>
-                                        </div>
-                                        <div class="col-lg-6 video-img">
-                                            <img src="img/video-thumbnail.webp" class="img-thumbnail">
-                                        </div>
-                                    </div>
-                                </div>
-                            </button>
-                        </form>
-                    <% }); %>
-                    <% } %>
-                </div>
-                <div class="col-lg-7 order-1 order-lg-2 right">
-                    <h1><%= subject %></h1>
-                    
-                    <div class="video-player">
-                        
-                            <div class="video-inside">
-                                <iframe id="video-player" width="640" height="360" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen style="border:none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 100%; max-width: 100%;">
-                                </iframe>
-                            </div>
-                        <!-- <div style='max-width: 640px'>
-                            <div style='position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;'>
-                                <iframe width="640" height="360" src="https://web.microsoftstream.com/embed/video/?autoplay=false&showinfo=true" allowfullscreen style="border:none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 100%; max-width: 100%;">
-                                </iframe>
-                            </div>
-                        </div> -->
-                    </div>
-                    <a href="/explore" class="btn btn-info mainmenu-btn" role="button">GO BACK TO MAIN MENU</a>
-                </div>
-            </div>
-        </div>
+        
     </div>
     
     <!-- <div class="footer">

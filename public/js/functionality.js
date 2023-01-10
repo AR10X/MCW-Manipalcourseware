@@ -79,3 +79,23 @@ var TxtRotate = function(el, toRotate, period) {
     }
     hidePreloader();
     });
+
+
+    // $(document).ready(function() {
+    //   $('.video-link').on('click', function(e) {
+    //     e.preventDefault();
+    //     var videoLink = $(this).closest('form').attr('action');
+    //     $('#video-player').attr('src', videoLink);
+    //   });
+    // });
+  
+    $(document).ready(function() {
+      var defaultLink = $('form').first().attr('action');
+      $('#video-player').attr('src', defaultLink);
+      $('.video-link').on('click', function(e) {
+        e.preventDefault(); 
+        var videoLink = $(this).closest('form').attr('action');
+        $('#video-player').attr('src', videoLink);
+      });
+    });
+    

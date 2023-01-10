@@ -56,7 +56,7 @@ app.post('/video-list', (req, res)=>{
           console.log("Error executing query:", err);
           return;
         }
-        res.render('videoConsole', {print: result});
+        res.render('videoConsole', {print: result, branch:branch, section: section, subject: subject});
       });
     });
 });
