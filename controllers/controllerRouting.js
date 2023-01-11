@@ -4,10 +4,12 @@ module.exports = (app)=>{
         res.render('explore');
         });
     
-    app.get('/video-page', (req, res)=>{
-        res.render('video-page');
+    app.get('/loginSignup', (req, res)=>{
+        res.render('loginSignup');
     });
-   
+    app.get('/crowdsource', (req, res)=>{
+        res.render('crowdsource');
+    });
     
 };
 

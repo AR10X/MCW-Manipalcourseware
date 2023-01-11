@@ -1,4 +1,5 @@
 
+
 /* ---------------------------------------------------
     HAMBURGER ICON
 ----------------------------------------------------- */
@@ -98,4 +99,29 @@ var TxtRotate = function(el, toRotate, period) {
         $('#video-player').attr('src', videoLink);
       });
     });
+    
+
+    // $(document).ready(function () {
+    //   var $sidenav = $("#left");
+    //   var $sidenavResizeHandle = $("#resize-handle");
+    //   var isResizing = false;
+    //   var startingWidth = 0;
+    //   var startingX = 0;
+    
+    //   $sidenavResizeHandle.on("mousedown", function (e) {
+    //     isResizing = true;
+    //     startingWidth = $sidenav.width();
+    //     startingX = e.clientX;
+    //   });
+    
+    //   $(document).on("mousemove", function (e) {
+    //     if (!isResizing) return;
+    //     var diffX = e.clientX - startingX;
+    //     $sidenav.width(startingWidth + diffX);
+    //   });
+    
+    //   $(document).on("mouseup", function () {
+    //     isResizing = false;
+    //   });
+    // });
     

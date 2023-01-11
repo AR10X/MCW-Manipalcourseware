@@ -1,11 +1,10 @@
 /* ---------------------------------------------------
-    VIDEO LIST
+    VIDEO CONSOLE
 ----------------------------------------------------- */
 
 .topbar-custom-video{
     background-color: #3100C9;
     height: 60px;
-    
 }
 
 .main-section{
@@ -21,14 +20,28 @@
     
 }
 
+#resize-handle {
+    max-width: 2px;
+    min-width: 2px;
+    height: calc(100vh - 60px);
+    background-color: #ccc;
+    cursor: col-resize;
+  }
+  
+
 .right{
     /* background: red; */
     padding-top: 30px;
     padding-bottom: 30px;
     justify-content: center;
     color: white;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: calc(100vh - 60px);
+}
+
+.left, .right{
+    resize: both;
+    overflow: auto;
 }
 
 .mainmenu-btn{

@@ -17,8 +17,10 @@
   <!-- Our Custom CSS -->
   <link rel="stylesheet" href="css/style.css" >
   <!-- <link rel="stylesheet" href="css/index.css" > -->
+  <link rel="stylesheet" href="css/utilities/mouseScroll.css" >
   <link rel="stylesheet" href="css/utilities/spinner.css" >
   <link rel="stylesheet" href="css/utilities/scrollbar.css" >
+  <link rel="stylesheet" href="css/loginSignup.css" >
   <link rel="stylesheet" href="css/videoConsole.css" >
   <!-- <link rel="stylesheet" href="css/videoPage.css" > -->
  
@@ -78,61 +80,70 @@
                     <span></span>
                 </button>
                 <a class="navbar-brand mr-auto" href="index.html">ManipalCourseWare</a>
-                <div class="crowdsource">
+                <div class="crowdsource ">
                     <ul class="nav">
-                      <li class="nav-item">
+                      <li class="nav-items">
                           <a href="#" class="btn crowdsource-btn" role="button">CROWDSOURCE</a>
                       </li>
                     </ul>
-                </div>
+                  </div>
             </div>
         </nav>
-        <div class="container-fluid main-section">
+        <div class="container-fluid main-form">
             <div class="row">
-                <div id="left" class="col-lg-5 order-3 order-lg-1 left ">
-                    <p><%= branch %>/<%= section %>/<%= subject %></p>
-                    <% if (print.length == 0) { %>
-                        <h2>Sorry, no videos available for this subject</h2>
-                    <% } else { %>
-                    <% print.forEach((lecture)=>{ %>
-                        <form action="<%=lecture.link%>" method="POST">
-                            <button type="submit" class="btn-card video-link">
-                                <div class="video-card">
-                                    <div class="row">
-                                        <div class="col-lg-6 video-heading">
-                                            <p><%=lecture.lecture_no %> . <%=lecture.lecture_topic %></p><br>
-                                            <p><%=lecture.date_time %><br><%=lecture.teacher_name %></p>
-                                        </div>
-                                        <div class="col-lg-6 video-img">
-                                            <img src="img/video-thumbnail.webp" class="img-thumbnail">
-                                        </div>
-                                    </div>
-                                </div>
-                            </button>
-                        </form>
-                    <% }); %>
-                    <% } %>
+                <div class="col-lg-2"></div>
+                <div class="col-lg-4 left-column w-40">
+                    <img src="img/online-education.png" alt="Crowdsource image">
+                    <h2 class="text-center">ManipalCourseWare</h2>
+                    <p class="text-center">This is where you can log in or sign up to access your data.</p>
                 </div>
-                <!-- <div id="resize-handle" class="col-lg-1 order-2 order-lg-2">
-                </div> -->
-                <div id="right" class="col-lg-7 order-1 order-lg-3 right">
-                    <h1><%= subject %></h1>
+                <div class="col-lg-4  right-column">
                     
-                    <div class="video-player">
-                        
-                            <div class="video-inside">
-                                <iframe id="video-player" width="640" height="360" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" allowfullscreen style="border:none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 100%; max-width: 100%;">
-                                </iframe>
+                        <div class="card-body">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="signup-tab" data-toggle="tab" href="#signup" role="tab" aria-controls="signup" aria-selected="false">Sign Up</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                                    <form action="/login" method="post">
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+                                        </div>
+                                        <button type="submit" class="btn btn-submit btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                                    <form action="/signup" method="post">
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+                                        </div>
+                                        <button type="submit" class="btn btn-submit btn-primary">Sign Up</button>
+                                    </form>
+                                </div>
                             </div>
-                        <!-- <div style='max-width: 640px'>
-                            <div style='position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;'>
-                                <iframe width="640" height="360" src="https://web.microsoftstream.com/embed/video/?autoplay=false&showinfo=true" allowfullscreen style="border:none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; height: 100%; max-width: 100%;">
-                                </iframe>
-                            </div>
-                        </div> -->
-                    </div>
-                    <a href="/explore" class="btn btn-info mainmenu-btn" role="button">GO BACK TO MAIN MENU</a>
+                        </div>
+                    
                 </div>
+                <div class="col-lg-2"></div>
             </div>
         </div>
     </div>

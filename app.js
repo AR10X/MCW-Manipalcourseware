@@ -16,7 +16,8 @@ controllerRouting(app);
 
 //static files
 app.use(express.static('./public'));
-app.use('/video-page', express.static('./public'))
+app.use('/loginSignup', express.static('./public'))
+app.use('/crowdsource', express.static('./public'))
 app.use(bodyParser.urlencoded({extended : false}));
 
 //Database config

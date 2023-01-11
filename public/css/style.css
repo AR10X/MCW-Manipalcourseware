@@ -223,7 +223,7 @@ a, a:hover, a:focus {
         margin-left: -273px;
         transform: none;
     }
-    #sidebarCollapse span:first-of-type,
+    /* #sidebarCollapse span:first-of-type,
     #sidebarCollapse span:nth-of-type(2),
     #sidebarCollapse span:last-of-type {
         transform: none;
@@ -241,6 +241,13 @@ a, a:hover, a:focus {
     }
     #sidebarCollapse.active span:last-of-type {
         transform: rotate(-45deg) translate(2px, -2px);
+    } */
+    #sidebarCollapse {
+        display: none;
+    }
+    .navbar-brand{
+        font-size: 20px;
+        margin-left: 10px;
     }
 }
 
@@ -310,3 +317,31 @@ a, a:hover, a:focus {
     color:red;
 }
 
+.crowdsource{
+    margin-right: 40px;
+}
+
+.crowdsource-btn{
+    
+    color:#fff;
+    font-size:1.1em;
+    font-weight: 500;
+    padding:3% 3%;
+    border-width: 2px;
+    
+    background-color: red;
+    border-color: red;
+}
+
+.crowdsource-btn:hover{
+    
+    color: white;
+    background-color: transparent;
+    border-color: white; 
+}
+
+@media (max-width: 768px) {
+    .crowdsource{
+        margin-right: 10px;
+    }
+}
