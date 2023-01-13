@@ -86,23 +86,25 @@ passport.use(
 
 passport.serializeUser((user, done) => {
   try {
-      if (!user.id) {
-          throw new Error("User object does not contain an id property");
+      if (!user.email) {
+          throw new Error("User object does not contain an email property");
       }
-      const { id } = user;
-      done(null, id);
+      const { email } = user;
+      console.log(user);
+      done(null, email);
   } catch (error) {
       done(error);
   }
 });
 
 
-passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (email, done) => {
   try {
-      const user = await User.findById(id);
+      const user = await User.findByEmail(email);
       if (!user) {
-          throw new Error(`User with id ${id} not found`);
+          throw new Error(`User with email ${email} not found`);
       }
+      console.log(user);
       done(null, user);
   } catch (error) {
       done(error);
@@ -324,20 +326,20 @@ app.post("/signup", (req, res, next) => {
 // });
 
 
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  req.flash("error", "You must be logged in to access this page");
-  console.log(req.flash());
-  res.redirect("/loginSignup");
-}
+// function isLoggedIn(req, res, next) {
+//   if (req.isAuthenticated()) {
+//     return next();
+//   }
+//   req.flash("error", "You must be logged in to access this page");
+//   console.log(req.flash());
+//   res.redirect("/loginSignup");
+// }
 
 
 app.get("/logout", (req, res) => {
   req.logout(function(err) {
     if (err) { return next(err); }
-    req.session.destroy();
+    
     req.flash("success", "You have successfully logged out!");
     console.log(req.flash());
     res.redirect("/loginSignup");
