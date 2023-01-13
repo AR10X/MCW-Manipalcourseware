@@ -16,6 +16,7 @@ const crypto = require("crypto");
 const secret = crypto.randomBytes(64).toString("hex");
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
+const MongoStore = require("connect-mongo");
 
 
 const User = require("./models/user"); // User model
@@ -33,7 +34,7 @@ app.use('/loginSignup', express.static('./public'));
 // app.use('/crowdsource', express.static('./public'))
 app.use(bodyParser.urlencoded({extended : false}));
 app.use('/', authRouter);
-app.use(flash());
+
 
 //Database config
 const db_key = process.env.DATABASE_KEY;
@@ -84,19 +85,37 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  try {
+      if (!user.id) {
+          throw new Error("User object does not contain an id property");
+      }
+      const { id } = user;
+      done(null, id);
+  } catch (error) {
+      done(error);
+  }
 });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    console.log(user); 
-    done(err, user);
-  });
+
+passport.deserializeUser(async (id, done) => {
+  try {
+      const user = await User.findById(id);
+      if (!user) {
+          throw new Error(`User with id ${id} not found`);
+      }
+      done(null, user);
+  } catch (error) {
+      done(error);
+  }
 });
+
 
 
 app.use(session({
   secret: secret,
+  store: MongoStore.create({
+    mongoUrl: "mongodb+srv://admin:"+db_key+"@cluster0.alu0pdy.mongodb.net/?retryWrites=true&w=majority"
+  }),
   resave: false,
   saveUninitialized: true,
   cookie: { secure: true }
@@ -105,7 +124,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+app.use(flash());
 
 // function isLoggedIn2(req, res, next) {
 //   if (req.isAuthenticated()) {
@@ -182,8 +201,6 @@ app.post("/login", (req, res, next) => {
     if (err) { return next(err); }
     if (!user) {
       req.flash("error", "Invalid email or password");
-      console.log(user);
-      console.log(info);
       console.log(req.flash());
       return res.redirect("/loginSignup");
     }
@@ -318,10 +335,13 @@ function isLoggedIn(req, res, next) {
 
 
 app.get("/logout", (req, res) => {
-  req.logout();
-  req.flash("success", "You have successfully logged out!");
-  console.log(req.flash());
-  res.redirect("/loginSignup");
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    req.session.destroy();
+    req.flash("success", "You have successfully logged out!");
+    console.log(req.flash());
+    res.redirect("/loginSignup");
+  });
 });
 
 
@@ -343,7 +363,7 @@ async function run() {
 }
 run().catch(console.dir);
 
-app.post('/videoConsole', isLoggedIn , (req, res)=>{
+app.post('/videoConsole' , (req, res)=>{
     const branch = req.body.branch;
     const section = req.body.section;
     const subject = req.body.subject;
