@@ -80,7 +80,9 @@
               <div class="crowdsource ">
                 <ul class="nav">
                   <li class="nav-items">
-                      <a href="/logout" class="btn crowdsource-btn" role="button">LOGOUT</a>
+                      <form action="/logout?_method=DELETE" method="POST">
+                        <button type="submit" class="btn crowdsource-btn">LOGOUT</button>
+                      </form>
                   </li>
                 </ul>
               </div>
