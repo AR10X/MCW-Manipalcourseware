@@ -91,7 +91,7 @@ var TxtRotate = function(el, toRotate, period) {
     // });
   
     $(document).ready(function() {
-      var defaultLink = $('form').first().attr('action');
+      var defaultLink = $('.card-form').attr('action');
       $('#video-player').attr('src', defaultLink);
       $('.video-link').on('click', function(e) {
         e.preventDefault(); 

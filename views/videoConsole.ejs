@@ -46,7 +46,7 @@
         </div>
         <ul class="list-unstyled components">
             <li class="active">
-                <a href="index.html"><i class="fas fa-home"></i>  HOME</a>
+                <a href="/home"><i class="fas fa-home"></i>  HOME</a>
             </li>
             <li>
                 <a href="/explore"><i class="fas fa-play-circle"></i>  EXPLORE</a>
@@ -77,12 +77,12 @@
                     <span></span>
                     <span></span>
                 </button>
-                <a class="navbar-brand mr-auto" href="index.html">ManipalCourseWare</a>
-                <div class="crowdsource">
+                <a class="navbar-brand mr-auto" href="/home">ManipalCourseWare</a>
+                <div class="crowdsource ">
                     <ul class="nav">
-                      <li class="nav-item">
-                        <form action="/logout" method="POST">
-                            <button class="btn crowdsource-btn">LOGOUT</button>
+                      <li class="nav-items">
+                          <form clas="logout-form" action="/logout?_method=DELETE" method="POST">
+                            <button type="submit" class="btn crowdsource-btn">LOGOUT</button>
                           </form>
                       </li>
                     </ul>
@@ -97,7 +97,7 @@
                         <h2>Sorry, no videos available for this subject</h2>
                     <% } else { %>
                     <% print.forEach((lecture)=>{ %>
-                        <form action="<%=lecture.link%>" method="POST">
+                        <form class="card-form" action="<%=lecture.link%>" method="POST">
                             <button type="submit" class="btn-card video-link">
                                 <div class="video-card">
                                     <div class="row">

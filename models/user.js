@@ -1,9 +1,15 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 require('dotenv').config({path: __dirname + '/process.env'});
-const db_key = process.env.DATABASE_KEY;
+const xss = require('xss-clean');
 
 const UserSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+    set: xss()
+  },
   email: {
     type: String,
     required: true,
@@ -30,11 +36,6 @@ UserSchema.methods.validatePassword = async function (password) {
 
 
 const User = mongoose.model("User", UserSchema);
-
-mongoose.connect( "mongodb+srv://admin:"+db_key+"@cluster0.alu0pdy.mongodb.net/?retryWrites=true&w=majority", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
 
 module.exports = User;
 

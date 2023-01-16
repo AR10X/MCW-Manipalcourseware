@@ -3,7 +3,6 @@ const express = require('express');
 const session = require('express-session');
 const app = express();
 const controllerRouting = require('./routes/controllerRouting');
-
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 require('dotenv').config({path: __dirname + '/process.env'});
@@ -17,6 +16,7 @@ const secret = crypto.randomBytes(64).toString("hex");
 const bcrypt = require("bcrypt");
 const MongoStore = require("connect-mongo");
 const methodOverride = require('method-override');
+const xss = require('xss-clean');
 
 
 const User = require("./models/user"); // User model
@@ -24,25 +24,21 @@ const User = require("./models/user"); // User model
 //set up template engine
 app.set('view engine', 'ejs');
 
-
-app.get("/", (req, res) => {
-  res.render("loginSignup");
-});
-
 //fire controllers
 controllerRouting(app);
 
 //static files
 app.use(express.static('./public'));
-app.use('/loginSignup', express.static('./public'));
+app.use('/', express.static('./public'));
 // app.use('/crowdsource', express.static('./public'))
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(methodOverride('_method'));
+app.use(xss());
 
 
 //Database config
 const db_key = process.env.DATABASE_KEY;
-const uri = "mongodb+srv://admin:"+db_key+"@cluster0.alu0pdy.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://admin:"+db_key+"@cluster0.alu0pdy.mongodb.net/?retryWrites=false&w=majority";
 
 
 //Mongoose connecting to MongoDB
@@ -122,10 +118,10 @@ passport.deserializeUser(async (id, done) => {
 app.use(session({
   secret: secret,
   store: MongoStore.create({
-    mongoUrl: "mongodb+srv://admin:"+db_key+"@cluster0.alu0pdy.mongodb.net/?retryWrites=false&w=majority"
+    mongoUrl: uri
   }),
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: { secure: false }
 }));
 
@@ -134,25 +130,43 @@ app.use(passport.session());
 
 app.use(flash());
 
+// function isLoggedInFirstTime(req, res, next) {
+//   if (req.isAuthenticated()) {
+//     return next();
+//   }
+//   req.flash("error", "You must be logged in to access this page");
+//   console.log(req.flash());
+//   res.redirect("/");
+// }
 
-
-app.get('/loginSignup', function(req, res, next) {
-  res.render('loginSignup');
+app.get("/", (req, res) => {
+  if (req.isAuthenticated()) {
+      res.render("home", {name: req.user.name});
+  } else {
+      res.render("loginSignup");
+  }
 });
 
-app.post("/login", (req, res, next) => {
+// app.get("/", (req, res) => {
+//     res.render("loginSignup");
+// });
+
+
+// var userNameForHome;
+
+app.post("/login", xss(), (req, res, next) => {
   passport.authenticate("local", (err, user) => {
     if (err) { return next(err); }
     if (!user) {
       req.flash("error", "Invalid email or password");
       console.log(req.flash());
-      return res.redirect("/loginSignup");
+      return res.redirect("/");
     }
     req.logIn(user, (err) => {
       if (err) { return next(err); }
       req.flash("success", "You have successfully logged in!");
       console.log(req.flash());
-      return res.redirect("/explore");
+      return res.redirect("/home");
     });
   })(req, res, next);
 });
@@ -160,33 +174,32 @@ app.post("/login", (req, res, next) => {
 
 
 // Signup route
-app.post("/signup", (req, res, next) => {
-  const { email, password } = req.body;
+app.post("/signup", xss(), (req, res, next) => {
+  const { name, email, password } = req.body;
+  console.log("name before saving in db:" + name);
 
   User.findOne({ email })
     .then((existingUser) => {
       if (existingUser) {
         req.flash("error", "Email already exists");
         console.log(req.flash());
-        return res.redirect("/loginSignup");
+        return res.redirect("/");
       }
       return bcrypt.hash(password, 10);
     })
     .then((hash) => {
-      const newUser = new User({ email, password: hash });
+      const newUser = new User({ name, email, password: hash});
       return newUser.save();
     })
     .then(() => {
       req.flash("success", "You have successfully signed up! Now you can log in.");
       console.log(req.flash());
-      res.redirect("/loginSignup");
+      res.redirect("/");
     })
     .catch((err) => {
       next(err);
     });
 });
-
-
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -195,25 +208,31 @@ function isLoggedIn(req, res, next) {
   }
   req.flash("error", "You must be logged in to access this page");
   console.log(req.flash());
-  res.redirect("/loginSignup");
+  res.redirect("/");
 }
+
+
+app.get('/home', isLoggedIn, function(req, res) {
+  res.render('home', {name: req.user.name});
+});
+
 
 app.get('/explore', isLoggedIn, (req, res)=>{
   console.log(req.user);
   res.render('explore');
 });
 
-app.get('/videoConsole', isLoggedIn, (req, res)=>{
-  console.log(req.user);
-  res.render('videoConsole');
-});
+
+// app.get('/videoConsole', isLoggedIn, (req, res)=>{
+//   console.log(req.user);
+//   res.render('videoConsole');
+// });
 
 app.delete("/logout", (req, res, next) => {
   req.session.destroy(function(err) {
     if (err) { return next(err); }
-    
     console.log(req.user);
-    res.redirect("/loginSignup");
+    res.redirect("/");
   });
 });
 
