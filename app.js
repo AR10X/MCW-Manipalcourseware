@@ -17,9 +17,11 @@ const bcrypt = require("bcrypt");
 const MongoStore = require("connect-mongo");
 const methodOverride = require('method-override');
 const xss = require('xss-clean');
+require('./dist/bundle.js');
 
 
-const User = require("./models/user"); // User model
+const UserModel = require("./models/userDetails");  // User model
+
 
 //set up template engine
 app.set('view engine', 'ejs');
@@ -60,7 +62,7 @@ passport.use(
     },
     async (email, password, done) => {
       try {
-        const user = await User.findOne({ email });
+        const user = await UserModel.findOne({ email });
         if (!user) {
           return done(null, false, {
             errors: { "email or password": "is invalid" },
@@ -101,7 +103,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-      const user = await User.findById(id);
+      const user = await UserModel.findById(id);
       if (!user) {
           throw new Error(`User with id ${id} not found`);
       }
@@ -143,7 +145,7 @@ app.get("/", (req, res) => {
   if (req.isAuthenticated()) {
       res.render("home", {name: req.user.name});
   } else {
-      res.render("loginSignup");
+      res.render("loginSignup", {messages: req.flash()});
   }
 });
 
@@ -158,13 +160,13 @@ app.post("/login", xss(), (req, res, next) => {
   passport.authenticate("local", (err, user) => {
     if (err) { return next(err); }
     if (!user) {
-      req.flash("error", "Invalid email or password");
+      req.flash('error', 'Invalid email or password');
       console.log(req.flash());
       return res.redirect("/");
     }
     req.logIn(user, (err) => {
       if (err) { return next(err); }
-      req.flash("success", "You have successfully logged in!");
+      req.flash('success', 'You have successfully logged in!');
       console.log(req.flash());
       return res.redirect("/home");
     });
@@ -178,7 +180,7 @@ app.post("/signup", xss(), (req, res, next) => {
   const { name, email, password } = req.body;
   console.log("name before saving in db:" + name);
 
-  User.findOne({ email })
+  UserModel.findOne({ email })
     .then((existingUser) => {
       if (existingUser) {
         req.flash("error", "Email already exists");
@@ -188,7 +190,7 @@ app.post("/signup", xss(), (req, res, next) => {
       return bcrypt.hash(password, 10);
     })
     .then((hash) => {
-      const newUser = new User({ name, email, password: hash});
+      const newUser = new UserModel({ name, email, password: hash});
       return newUser.save();
     })
     .then(() => {

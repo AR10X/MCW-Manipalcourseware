@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 require('dotenv').config({path: __dirname + '/process.env'});
 const xss = require('xss-clean');
 
+
+
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -35,11 +37,8 @@ UserSchema.methods.validatePassword = async function (password) {
 };
 
 
-const User = mongoose.model("User", UserSchema);
+const UserModel = mongoose.model("UserModel", UserSchema);
 
-module.exports = User;
+module.exports = UserModel;
 
-// userSchema.methods.validatePassword = function(password) {
-//   return password === this.password;
-// };
 
