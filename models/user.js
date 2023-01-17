@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 require('dotenv').config({path: __dirname + '/process.env'});
-const xss = require('xss-clean');
 
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
     unique: true,
-    set: xss()
+    match: /^[a-zA-Z0-9\s]+$/
+
   },
   email: {
     type: String,
