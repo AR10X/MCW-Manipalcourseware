@@ -138,11 +138,13 @@ app.use(flash());
 //   res.redirect("/");
 // }
 
+let loggedOut = false;
+
 app.get("/", (req, res) => {
   if (req.isAuthenticated()) {
       res.render("home", {username: req.user.username});
-  } else {
-      res.render("loginSignup", {message: req.flash()});
+  }else{
+      res.render("loginSignup", {message: req.flash(), loggedOut: loggedOut });
   }
 });
 
@@ -226,6 +228,7 @@ app.get('/explore', isLoggedIn, (req, res)=>{
 app.delete("/logout", (req, res, next) => {
   req.session.destroy(function(err) {
     if (err) { return next(err); }
+    loggedOut = true;
     res.redirect("/");
   });
 });

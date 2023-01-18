@@ -86,6 +86,17 @@ img {
 
 }
 
+.alert {
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    padding: 5px 0 0 0;
+}
+.alert p {
+    text-align: center;
+}
+
+
 .form-control:focus {
     border: none;
     border-bottom: 2px solid #ccc;

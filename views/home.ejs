@@ -31,10 +31,6 @@
 </head>
 
 <body>
-    <script type="text/javascript">
-        let successMsg = <%= message.success %>;
-        alert(successMsg);
-    </script>
 <!--CSS Spinner-->
 <div class="spinner-wrapper">
     <div class="spinner"></div>
@@ -52,6 +48,9 @@
                 </li>
                 <li>
                     <a href="/explore"><i class="fas fa-play-circle"></i>  EXPLORE</a>
+                </li>
+                <li>
+                    <a href="/crowdsource"><i class="fas fa-play-circle"></i>  CROWDSOURCE</a>
                 </li>
                 <li>
                     <p>FOLLOW US</p>
@@ -94,6 +93,12 @@
             
             <!--Landing page-->
                 <div class="landingpage">
+                    <% if(message.success){%>
+                        <div class="alert alert-success alert-dismissible">
+                            <p><%= message.success %></p>
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    <% } %>
                     <img src="img/illustration-landingpage.png" class="illustration">
                     <h1 class="landing-text-heading">Welcome! <span
                         class="txt-rotate"

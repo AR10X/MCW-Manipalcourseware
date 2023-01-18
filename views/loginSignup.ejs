@@ -148,14 +148,15 @@
                                 
                             </div>
                         </div>
-                        <% if(message && message.success) {%>
-                            <div class="alert alert-succes"><%=message.success%></div>
+                        <% if(loggedOut){%>
+                            <div class="alert alert-success alert-dismissible">
+                                <p>You have logged out</p>
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            </div>
                         <% } %>
-                        <% if(message && message.error){%>
+                        <% if((typeof message !== 'undefined') && message.error){%>
                             <div class="alert alert-danger"><%=message.error%></div>
                         <% } %>
-                        <!-- <%= (message && message.error) ? `` : '' %>
-                        <%= (message && message.success) ? `` : '' %> -->
                 </div>
                 <div class="col-lg-2"></div>
             </div>

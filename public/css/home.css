@@ -48,6 +48,15 @@
     text-align: center;
 }
 
+.alert {
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    padding: 5px 0 0 0;
+}
+.alert p {
+    text-align: center;
+}
 
 .illustration {
     width: 32%;
