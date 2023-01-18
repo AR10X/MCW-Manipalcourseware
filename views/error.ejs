@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!--meta tag for responsive viewport-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>ManipalCourseWare</title>
+
+  <!-- google fonts link below here-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:200,100,400" rel="stylesheet" type="text/css" />
+
+  <!--Bootstrap 4 CSS-->
+  <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+  <!-- Our Custom CSS -->
+  <link rel="stylesheet" href="css/error.css" >
+  <!-- <link rel="stylesheet" href="css/index.css" > -->
+  <!-- <link rel="stylesheet" href="css/utilities/mouseScroll.css" >
+  <link rel="stylesheet" href="css/utilities/spinner.css" >
+  <link rel="stylesheet" href="css/utilities/scrollbar.css" >
+  <link rel="stylesheet" href="css/loginSignup.css" >
+  <link rel="stylesheet" href="css/videoConsole.css" > -->
+  <!-- <link rel="stylesheet" href="css/videoPage.css" > -->
+ 
+  <!--fontawesome icons kitcode below-->
+  <script src="https://kit.fontawesome.com/f18f73cc60.js" crossorigin="anonymous"></script>
+
+  <!--Jquery&popperjs link below-->
+  <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@popperjs/core@2"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!-- <script type="text/javascript" src="js/functionality.js"></script> -->
+</head>
+<body >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6 left">
+        <img src="/img/404.png" alt="Error">
+      </div>
+      <div class="col-lg-6 right">
+        <h1>404</h1>
+        <% if(typeof url !== 'undefined') {%>
+          <p>The requested URL was not found.</p>
+        <% } else {%>
+          <p><%=message%></p>
+        <% } %>
+        <div>
+          <a href="/" class="btn btn-info btn-error">BACK TO HOME</a>
+        </div>
+      </div>
+    </div>
+  </div>  
+</body>
+</html>

@@ -16,7 +16,7 @@ const secret = crypto.randomBytes(64).toString("hex");
 const bcrypt = require("bcrypt");
 const MongoStore = require("connect-mongo");
 const methodOverride = require('method-override');
-const xss = require('xss-clean');
+
 
 
 const User = require("./models/user"); // User model
@@ -30,10 +30,9 @@ controllerRouting(app);
 //static files
 app.use(express.static('./public'));
 app.use('/', express.static('./public'));
-// app.use('/crowdsource', express.static('./public'))
+app.use('error', express.static('./public'))
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(methodOverride('_method'));
-app.use(xss());
 
 
 //Database config
@@ -154,7 +153,7 @@ app.get("/", (req, res) => {
 
 // var userNameForHome;
 
-app.post("/login", xss(), (req, res, next) => {
+app.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user) => {
     if (err) { return next(err); }
     if (!user) {
@@ -174,7 +173,7 @@ app.post("/login", xss(), (req, res, next) => {
 
 
 // Signup route
-app.post("/signup", xss(), (req, res, next) => {
+app.post("/signup", (req, res, next) => {
   const { name, email, password } = req.body;
   console.log("name before saving in db:" + name);
 
@@ -284,6 +283,17 @@ app.post('/videoConsole' , isLoggedIn, (req, res)=>{
 //     const link_val = req.params.param;
 //     res.render('video-page', {printvalue:link_val});
 // });
+
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.render('error', { message: err.message, error: err });
+});
+
+
+app.use(function(req, res, next) {
+  res.status(404).render('error', {url: req.originalUrl});
+});
+
 
 //listen to port
 app.listen(3100);
