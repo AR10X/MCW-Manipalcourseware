@@ -131,8 +131,8 @@
                                 <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
                                     <form action="/signup" method="post">
                                         <div class="form-group">
-                                            <label for="name">Name</label>
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+                                            <label for="username">Username</label>
+                                            <input type="text" class="form-control" id="username" name="username" pattern="^[a-zA-Z0-9/s]+$" title="Username can only contain letters, numbers." required  placeholder="Enter Username">
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email</label>
@@ -148,8 +148,14 @@
                                 
                             </div>
                         </div>
-                       
-                          
+                        <% if(message && message.success) {%>
+                            <div class="alert alert-succes"><%=message.success%></div>
+                        <% } %>
+                        <% if(message && message.error){%>
+                            <div class="alert alert-danger"><%=message.error%></div>
+                        <% } %>
+                        <!-- <%= (message && message.error) ? `` : '' %>
+                        <%= (message && message.success) ? `` : '' %> -->
                 </div>
                 <div class="col-lg-2"></div>
             </div>

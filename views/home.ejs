@@ -31,6 +31,10 @@
 </head>
 
 <body>
+    <script type="text/javascript">
+        let successMsg = <%= message.success %>;
+        alert(successMsg);
+    </script>
 <!--CSS Spinner-->
 <div class="spinner-wrapper">
     <div class="spinner"></div>
@@ -94,7 +98,7 @@
                     <h1 class="landing-text-heading">Welcome! <span
                         class="txt-rotate"
                         data-period="2000"
-                        data-rotate='["<%=name%>"]'></span></h1>
+                        data-rotate='["<%=username%>"]'></span></h1>
                     <div class="btn-div">
                         <a href="/explore" class="btn btn-info btn-custom1" role="button">GET STARTED</a>
                     </div>

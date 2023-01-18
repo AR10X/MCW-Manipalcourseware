@@ -140,9 +140,9 @@ app.use(flash());
 
 app.get("/", (req, res) => {
   if (req.isAuthenticated()) {
-      res.render("home", {name: req.user.name});
+      res.render("home", {username: req.user.username});
   } else {
-      res.render("loginSignup");
+      res.render("loginSignup", {message: req.flash()});
   }
 });
 
@@ -158,13 +158,13 @@ app.post("/login", (req, res, next) => {
     if (err) { return next(err); }
     if (!user) {
       req.flash("error", "Invalid email or password");
-      console.log(req.flash());
+      // console.log(req.flash());
       return res.redirect("/");
     }
     req.logIn(user, (err) => {
       if (err) { return next(err); }
       req.flash("success", "You have successfully logged in!");
-      console.log(req.flash());
+      // console.log(req.flash());
       return res.redirect("/home");
     });
   })(req, res, next);
@@ -174,25 +174,24 @@ app.post("/login", (req, res, next) => {
 
 // Signup route
 app.post("/signup", (req, res, next) => {
-  const { name, email, password } = req.body;
-  console.log("name before saving in db:" + name);
+  const { username, email, password } = req.body;
 
   User.findOne({ email })
     .then((existingUser) => {
       if (existingUser) {
         req.flash("error", "Email already exists");
-        console.log(req.flash());
+        // console.log(req.flash());
         return res.redirect("/");
       }
       return bcrypt.hash(password, 10);
     })
     .then((hash) => {
-      const newUser = new User({ name, email, password: hash});
+      const newUser = new User({ username, email, password: hash});
       return newUser.save();
     })
     .then(() => {
       req.flash("success", "You have successfully signed up! Now you can log in.");
-      console.log(req.flash());
+      // console.log(req.flash());
       res.redirect("/");
     })
     .catch((err) => {
@@ -202,22 +201,19 @@ app.post("/signup", (req, res, next) => {
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
-    console.log("islogged in deserialize");
     return next();
   }
   req.flash("error", "You must be logged in to access this page");
-  console.log(req.flash());
   res.redirect("/");
 }
 
 
 app.get('/home', isLoggedIn, function(req, res) {
-  res.render('home', {name: req.user.name});
+  res.render('home', {username: req.user.username, message: req.flash()});
 });
 
 
 app.get('/explore', isLoggedIn, (req, res)=>{
-  console.log(req.user);
   res.render('explore');
 });
 
@@ -230,7 +226,6 @@ app.get('/explore', isLoggedIn, (req, res)=>{
 app.delete("/logout", (req, res, next) => {
   req.session.destroy(function(err) {
     if (err) { return next(err); }
-    console.log(req.user);
     res.redirect("/");
   });
 });

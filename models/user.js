@@ -3,11 +3,11 @@ const bcrypt = require("bcrypt");
 require('dotenv').config({path: __dirname + '/process.env'});
 
 const UserSchema = new mongoose.Schema({
-  name: {
+  username: {
     type: String,
     required: true,
     unique: true,
-    match: /^[a-zA-Z0-9\s]+$/
+    match: /^[a-zA-Z0-9]+$/
 
   },
   email: {
