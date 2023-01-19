@@ -367,6 +367,25 @@ app.delete('/videoConsole/:id', isLoggedIn, (req, res) => {
   });
 });
 
+app.post('/createLecture', isLoggedIn, (req, res) => {
+  const { branch_code, section, subject_code, lecture_no, lecture_topic, date_time, teacher_name, link } = req.body;
+  client.connect((err) => {
+      if (err) {
+          console.log("Error connecting to MongoDB server:", err);
+          return;
+      }
+      const db = client.db("lecture").collection("videos");
+      db.insertOne({ branch_code, section, subject_code, lecture_no, lecture_topic, date_time, teacher_name, link }, (err, result) => {
+          if (err) {
+              console.log("Error executing query:", err);
+              return;
+          }
+          res.sendStatus(201);
+      });
+  });
+});
+
+
 
 // app.post('/video-page/:param', function(req, res){
 //     const link_val = req.params.param;

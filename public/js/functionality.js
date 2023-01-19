@@ -182,6 +182,7 @@ function deleteLecture(lectureId) {
           alert("Lecture deleted successfully!");
           // code to remove the deleted lecture from the UI, for example:
           document.getElementById(`lecture-${lectureId}`).remove();
+          location.reload();
       } else {
           alert("An error occurred while trying to delete the lecture. Please try again later.");
       }
@@ -256,4 +257,48 @@ function editLecture(event) {
     });
   }
   
+
+  //ADD feature
   
+  function closeNewCardModal() {
+    document.getElementById("newCardModal").style.display = "none";
+  }
+  
+
+  function createLecture(branch, section, subject) {
+    const branchName = branch;
+    const sectionName = section;
+    const subjectName = subject;
+    const lectureNo = document.getElementById("add-lectureNo").value;
+    const lectureTopic = document.getElementById("add-lectureTopic").value;
+    const dateTime = document.getElementById("add-dateTime").value;
+    const teacherName = document.getElementById("add-teacherName").value;
+    const lectureLink = document.getElementById("add-lectureLink").value;
+    const data = {  branch_code: branchName, 
+                    section: sectionName, 
+                    subject_code: subjectName, 
+                    lecture_no: lectureNo, 
+                    lecture_topic: lectureTopic, 
+                    date_time: dateTime, 
+                    teacher_name: teacherName, 
+                    link: lectureLink 
+                  };
+    fetch('/createLecture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+    .then(res => {
+        if (res.status === 201) {
+            alert("Lecture created successfully!");
+            closeNewCardModal();
+            location.reload();
+        } else {
+            alert("An error occurred while trying to create the lecture. Please try again later.");
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        alert("An error occurred while trying to create the lecture. Please try again later.");
+    });
+}
