@@ -202,7 +202,7 @@
         <div class="modal-content" id="newCardContent">
             <div class="modal-header">
                 <h5 class="modal-title">Add New Lecture</h5>
-                <button type="button" class="close" id="closeModal">
+                <button type="button" class="close" id="closeModal" onclick="closeNewCardModal()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -231,7 +231,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="closeModal" onclick="closeNewCardModel()">Close</button>
+                <button type="button" class="btn btn-secondary" id="closeModal" onclick="closeNewCardModal()">Close</button>
                 <button type="button" class="btn btn-primary" onclick="createLecture('<%=branch%>', '<%=section%>', '<%=subject%>')">Create</button>
             </div>
         </div>
