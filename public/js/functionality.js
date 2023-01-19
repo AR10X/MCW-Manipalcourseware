@@ -262,6 +262,7 @@ function editLecture(event) {
   
   function closeNewCardModal() {
     document.getElementById("newCardModal").style.display = "none";
+    location.reload();
   }
   
 
@@ -292,7 +293,6 @@ function editLecture(event) {
         if (res.status === 201) {
             alert("Lecture created successfully!");
             closeNewCardModal();
-            location.reload();
         } else {
             alert("An error occurred while trying to create the lecture. Please try again later.");
         }
