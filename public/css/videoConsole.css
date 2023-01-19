@@ -2,6 +2,8 @@
     VIDEO CONSOLE
 ----------------------------------------------------- */
 
+
+
 .topbar-custom-video{
     background-color: #3100C9;
     height: 60px;
@@ -53,7 +55,7 @@
     padding:1% 3%;
     display: block;
     justify-content: center;
-    margin: 5% auto auto auto;
+    margin: 3% auto auto auto;
     border-width: 3px;
     background-color: red;
     color: white;
@@ -93,6 +95,19 @@
 .btn-card:focus{
     outline: 0;
 }
+
+.btn-edit {
+    width: 25%;
+}
+
+.btn-delete {
+    width: 25%;
+}
+
+.card-form-actions {
+    text-align: center;
+}
+
 
 .video-card{
     margin: 20px;
@@ -139,3 +154,44 @@
     }
   }
 
+
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 10000000; /* Sit on top */
+    padding-top: 100px; /* Location of the modal */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+  

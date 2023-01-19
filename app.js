@@ -16,6 +16,8 @@ const secret = crypto.randomBytes(64).toString("hex");
 const bcrypt = require("bcrypt");
 const MongoStore = require("connect-mongo");
 const methodOverride = require('method-override');
+const { ObjectId } = require('mongodb');
+
 
 
 
@@ -32,6 +34,8 @@ app.use(express.static('./public'));
 app.use('/', express.static('./public'));
 app.use('error', express.static('./public'))
 app.use(bodyParser.urlencoded({extended : false}));
+app.use(bodyParser.json());
+
 app.use(methodOverride('_method'));
 
 
@@ -144,7 +148,8 @@ app.get("/", (req, res) => {
   if (req.isAuthenticated()) {
       res.render("home", {username: req.user.username});
   }else{
-      res.render("loginSignup", {message: req.flash(), loggedOut: loggedOut });
+    loggedOut = false;  
+    res.render("loginSignup", {message: req.flash(), loggedOut: loggedOut });
   }
 });
 
@@ -252,6 +257,27 @@ async function run() {
 }
 run().catch(console.dir);
 
+app.get('/videoConsole/:lectureId', (req, res) => {
+  const lectureId = req.params.lectureId;
+  client.connect((err) => {
+      if (err) {
+          console.log("Error connecting to MongoDB server:", err);
+          return;
+      }
+      const db = client.db("lecture").collection("videos");
+      db.findOne({ _id: ObjectId(lectureId) }, (err, Lecture) => {
+          if (err) {
+              console.log("Error executing query:", err);
+              return;
+          }
+          console.log("sent modal data again");
+          console.log(Lecture);
+          res.json(Lecture);
+      });
+  });
+});
+
+
 app.post('/videoConsole' , isLoggedIn, (req, res)=>{
     const branch = req.body.branch;
     const section = req.body.section;
@@ -271,9 +297,74 @@ app.post('/videoConsole' , isLoggedIn, (req, res)=>{
           console.log("Error executing query:", err);
           return;
         }
+        console.log("succesuffly sent result to front");
         res.render('videoConsole', {print: result, branch:branch, section: section, subject: subject});
       });
     });
+});
+
+app.patch('/videoConsole/:id', isLoggedIn, (req, res) => {
+  const { id } = req.params;
+  let update = { $set: {} };
+  
+  if (req.body.lecture_no !== null) {
+    update.$set.lecture_no = req.body.lecture_no;
+  }
+  if (req.body.lecture_topic !== null) {
+    update.$set.lecture_topic = req.body.lecture_topic;
+  }
+  if (req.body.date_time !== null) {
+    update.$set.date_time = req.body.date_time;
+  }
+  if (req.body.teacher_name !== null) {
+    update.$set.teacher_name = req.body.teacher_name;
+  }
+  if (req.body.link !== null) {
+    update.$set.link = req.body.link;
+  }
+  client.connect((err) => {
+    if (err) {
+      console.log("Error connecting to MongoDB server:", err);
+      return;
+    }
+
+    const db = client.db("lecture").collection("videos");
+    var query = { _id: ObjectId(id) };
+    console.log("query object id:" + query);
+
+    db.updateOne(query, update, (err, result) => {
+      if (err) {
+        console.log("Error executing query:", err);
+        return;
+      }
+      res.sendStatus(200);
+    });
+  });
+});
+
+
+
+
+app.delete('/videoConsole/:id', isLoggedIn, (req, res) => {
+  const lectureId = req.params.id;
+  client.connect((err) => {
+      if (err) {
+          console.log("Error connecting to MongoDB server:", err);
+          return res.status(500).send({ message: 'Internal server error' });
+      }
+      const db = client.db("lecture").collection("videos");
+      db.deleteOne({ _id: ObjectId(lectureId) }, (err, result) => {
+          if (err) {
+              console.log("Error executing query:", err);
+              return res.status(500).send({ message: 'Internal server error' });
+          }
+          if(result.deletedCount==1){
+              return res.status(200).send({ message: 'Successfully Deleted' });
+          }else{
+              return res.status(404).send({ message: 'lecture not found' });
+          }
+      });
+  });
 });
 
 

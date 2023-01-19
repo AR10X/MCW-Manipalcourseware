@@ -17,7 +17,7 @@
   <!-- Our Custom CSS -->
   <link rel="stylesheet" href="css/style.css" >
   <!-- <link rel="stylesheet" href="css/index.css" > -->
-  <link rel="stylesheet" href="css/utilities/spinner.css" >
+  <!-- <link rel="stylesheet" href="css/utilities/spinner.css" > -->
   <link rel="stylesheet" href="css/utilities/scrollbar.css" >
   <link rel="stylesheet" href="css/videoConsole.css" >
   <!-- <link rel="stylesheet" href="css/videoPage.css" > -->
@@ -34,9 +34,9 @@
 <body >
 
 <!--CSS Spinner-->
-<div class="spinner-wrapper">
+<!-- <div class="spinner-wrapper">
     <div class="spinner"></div>
-</div>
+</div> -->
 
   <div class="wrapper">
     <!-- Sidebar Holder -->
@@ -100,7 +100,7 @@
                         <h2>Sorry, no videos available for this subject</h2>
                     <% } else { %>
                     <% print.forEach((lecture)=>{ %>
-                        <form class="card-form" action="<%=lecture.link%>" method="POST">
+                        <form id="<%='lecture-'+lecture._id%>" class="card-form card-form-actions" action="<%=lecture.link%>" method="POST">
                             <button type="submit" class="btn-card video-link">
                                 <div class="video-card">
                                     <div class="row">
@@ -112,8 +112,13 @@
                                             <img src="img/video-thumbnail.webp" class="img-thumbnail">
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </button>
+                            <button type="button" class="btn btn-primary btn-edit" value="<%=lecture._id%>" onclick="openEditModal(this.value)">Edit</button>
+                            <button type="button" class="btn btn-danger btn-delete" value="<%=lecture._id%>" onclick="deleteLecture(this.value)"
+                            >Delete</button>
+                            
                         </form>
                     <% }); %>
                     <% } %>
@@ -136,7 +141,9 @@
                             </div>
                         </div> -->
                     </div>
+                    <button type="button" class="btn btn-success mainmenu-btn" data-toggle="modal" data-target="#newCardModal">Add New</button>
                     <a href="/explore" class="btn btn-info mainmenu-btn" role="button">GO BACK TO MAIN MENU</a>
+                    
                 </div>
             </div>
         </div>
@@ -148,6 +155,83 @@
             <li>Made with <span><i class="fa fa-heart" aria-hidden="true"></i></span> by Abdul Rehaman</li>
         </ul>
     </div> -->
+</div>
+<!-- Modal HTML -->
+
+<div id="edit-modal" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Lecture</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="closeEditModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-form" onsubmit="editLecture(event)" data-lecture-id="">
+                    <div class="form-group">
+                        <label for="edit-modal-lecture-no">Lecture No</label>
+                        <input type="text" class="form-control" id="edit-modal-lecture-no">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-modal-lecture-topic">Lecture Topic</label>
+                        <input type="text" class="form-control" id="edit-modal-lecture-topic">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-modal-date-time">Date & Time</label>
+                        <input type="text" class="form-control" id="edit-modal-date-time">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-modal-teacher-name">Teacher Name</label>
+                        <input type="text" class="form-control" id="edit-modal-teacher-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-modal-lecture-link">Lecture video link</label>
+                        <input type="text" class="form-control" id="edit-modal-lecture-link">
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" value="Save">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeEditModal()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+  
+<div class="modal" id="newCardModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Lecture</h5>
+                <button type="button" class="close" id="closeModal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="lectureNo">Lecture Number</label>
+                        <input type="text" class="form-control" id="lectureNo" placeholder="Enter lecture number">
+                    </div>
+                    <div class="form-group">
+                        <label for="lectureTopic">Lecture Topic</label>
+                        <input type="text" class="form-control" id="lectureTopic" placeholder="Enter lecture topic">
+                    </div>
+                    <div class="form-group">
+                        <label for="dateTime">Date and Time</label>
+                        <input type="text" class="form-control" id="dateTime" placeholder="Enter date and time">
+                    </div>
+                    <div class="form-group">
+                        <label for="teacherName">Teacher Name</label>
+                        <input type="text" class="form-control" id="teacherName" placeholder="Enter teacher name">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="closeModal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="createLecture()">Create</button>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

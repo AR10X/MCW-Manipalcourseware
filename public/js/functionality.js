@@ -126,4 +126,134 @@ var TxtRotate = function(el, toRotate, period) {
     // });
     
 
+
+// window.onload = function() {
+// const modal = document.getElementById("newCardModal");
+// const form = document.getElementById("newCardForm");
+// const addNewBtn = document.getElementById("addNewBtn");
+
+// // Show the modal when the button is clicked
+// addNewBtn.addEventListener("click", function() {
+//   modal.style.display = "block";
+// });
+
+// // Hide the modal when the close button is clicked
+// form.addEventListener("submit", function(event) {
+//   event.preventDefault(); // prevent page refresh
+//   const lecture = {
+//     lectureNo: document.getElementById("lectureNo").value,
+//     lectureTopic: document.getElementById("lectureTopic").value,
+//     dateTime: document.getElementById("dateTime").value,
+//     teacherName: document.getElementById("teacherName").value
+//   };
+//   // Send a POST request to the server to create the new lecture
+//   // use fetch or axios library or any other http library
+//   // you can also use XMLHttpRequest 
+//   fetch('/lectures', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(lecture)
+//   }).then(response => {
+//     if (response.ok) {
+//       return response.json();
+//     } else {
+//       throw new Error('Failed to create lecture');
+//     }
+//   }).then(data => {
+//     alert('Lecture created successfully');
+//       modal.style.display = "none";
+//       form.reset(); // Reset the form fields
+//     }).catch(error => {
+//       console.error('Error:', error);
+//       alert('Failed to create lecture');
+//     });
+//   });
+// }
+
+
+function deleteLecture(lectureId) {
+  console.log(lectureId);
+  fetch('/videoConsole/' + lectureId, {
+      method: 'DELETE',
+  }).then(res => {
+      if(res.status === 200) {
+          alert("Lecture deleted successfully!");
+          // code to remove the deleted lecture from the UI, for example:
+          document.getElementById(`lecture-${lectureId}`).remove();
+      } else {
+          alert("An error occurred while trying to delete the lecture. Please try again later.");
+      }
+  }).catch(err => {
+      console.log(err);
+      alert("An error occurred while trying to delete the lecture. Please try again later.");
+  });
+}
+
+
+
+//Function to open modal
+function openEditModal(lectureId) {
+  // Fetching data for the lecture
+  
+  fetch(`/videoConsole/${lectureId}`)
+    .then(res => res.json())
+    .then(lecture => {
+      // Populating the modal with the lecture data
+      document.getElementById("edit-form").setAttribute("data-lecture-id", lecture._id);
+      document.getElementById('edit-modal-lecture-no').value = lecture.lecture_no;
+      document.getElementById('edit-modal-lecture-topic').value = lecture.lecture_topic;
+      document.getElementById('edit-modal-date-time').value = lecture.date_time;
+      document.getElementById('edit-modal-teacher-name').value = lecture.teacher_name;
+      document.getElementById('edit-modal-lecture-link').value = lecture.link;
+      // Showing the modal
+      document.getElementById('edit-modal').style.display = "block";
+      
+    });
+}
+
+// Function to close modal
+function closeEditModal() {
+  document.getElementById('edit-modal').style.display = "none";
+}
+
+// Function to handle form submission
+function editLecture(event) {
+  event.preventDefault();
+  
+  const lectureId = event.target.dataset.lectureId;
+  const lectureNo = document.getElementById('edit-modal-lecture-no').value;
+  const lectureTopic = document.getElementById('edit-modal-lecture-topic').value;
+  const dateTime = document.getElementById('edit-modal-date-time').value;
+  const teacherName = document.getElementById('edit-modal-teacher-name').value;
+  const lectureLink = document.getElementById('edit-modal-lecture-link').value;
+
+  let data = {};
+  data.lecture_no = lectureNo;
+  data.lecture_topic = lectureTopic;
+  data.date_time = dateTime;
+  data.teacher_name = teacherName;
+  data.link = lectureLink;
+
+  // Making a PATCH request to the server
+  fetch(`/videoConsole/${lectureId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+  }).then(res => {
+    if (res.status === 200) {
+        alert("Lecture edited successfully!");
+        closeEditModal();
+        location.reload();
+    } else {
+        alert("An error occurred while trying to edit the lecture. Please try again later.");
+      }
+    })
+    .catch(err => {
+        console.log(err);
+        alert("An error occurred while trying to edit the lecture. Please try again later.");
+    });
+  }
+  
   
